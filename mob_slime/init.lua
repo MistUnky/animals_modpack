@@ -37,7 +37,7 @@ local slime_groups = {
 					}
 
 function mob_slime_bounce(entity)
-	local pos = entity.object:getpos()
+	local pos = entity.object:get_pos()
 	local current_velocity = entity.object:getvelocity()
 
 	local node_below = minetest.get_node({x=pos.x,y=pos.y + entity.collisionbox[2] -0.01,z=pos.z})

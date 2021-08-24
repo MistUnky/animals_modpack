@@ -62,8 +62,8 @@ function graphics.update(entity,now,dtime)
 			(entity.dynamic_data.attention.current_value >
 			entity.data.attention.watch_threshold) then
 		dbg_mobf.graphics_lvl3("MOBF: attention mode orientation update")
-		local direction = mobf_get_direction(entity.object:getpos(),
-								entity.dynamic_data.attention.most_relevant_target:getpos())
+		local direction = mobf_get_direction(entity.object:get_pos(),
+								entity.dynamic_data.attention.most_relevant_target:get_pos())
 		if entity.mode == "3d" then
 			graphics.setyaw(entity,
 				mobf_calc_yaw(direction.x,direction.z))

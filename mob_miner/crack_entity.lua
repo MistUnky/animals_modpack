@@ -32,7 +32,7 @@ minetest.register_entity("mob_miner:cracksim",
 			end
 			
 			self.timepassed = 0
-			local ownnode = minetest.get_node_or_nil(self.object:getpos())
+			local ownnode = minetest.get_node_or_nil(self.object:get_pos())
 			
 			if ownnode == nil then
 				self.object:remove()

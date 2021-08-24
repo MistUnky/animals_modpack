@@ -81,7 +81,7 @@ end
 -------------------------------------------------------------------------------
 function fighting.push_back(entity,dir)
 	--get some base information
-	local mob_pos     = entity.object:getpos()
+	local mob_pos     = entity.object:get_pos()
 	local mob_basepos = entity.getbasepos(entity)
 	local dir_rad     = mobf_calc_yaw(dir.x,dir.z)
 	local posdelta    = mobf_calc_vector_components(dir_rad,0.5)
@@ -118,7 +118,7 @@ end
 --! @param kill_reason reason to log for killing
 -------------------------------------------------------------------------------
 function fighting.dodamage(entity,attacker, kill_reason)
-	local mob_pos = entity.object:getpos()
+	local mob_pos = entity.object:get_pos()
 
 	--update lifebar
 	mobf_lifebar.set(entity.lifebar,entity.object:get_hp()/entity.hp_max)
@@ -191,9 +191,9 @@ function fighting.hit(entity,attacker)
 	end
 
 	--get some base information
-	local mob_pos     = entity.object:getpos()
+	local mob_pos     = entity.object:get_pos()
 	local mob_basepos = entity.getbasepos(entity)
-	local targetpos   = attacker:getpos()
+	local targetpos   = attacker:get_pos()
 	local dir         = mobf_get_direction(targetpos,mob_basepos)
 	
 	
@@ -338,8 +338,8 @@ function fighting.identify_combat_state(entity,distance)
 	local combat_generic  = mob_state.get_state_by_name(entity,"combat")
 
 	if distance == nil then
-		local mob_pos    = entity.object:getpos()
-		local targetpos  = target:getpos()
+		local mob_pos    = entity.object:get_pos()
+		local targetpos  = target:get_pos()
 		distance   = mobf_calc_distance(mob_pos,targetpos)
 	end
 
@@ -432,7 +432,7 @@ function fighting.switch_to_combat_state(entity,now,target)
 	-- play start_attack sound
 	if entity.data.sound ~= nil and
 		entity.data.sound.start_attack ~= nil then
-		sound.play(entity.object:getpos(),entity.data.sound.start_attack);
+		sound.play(entity.object:get_pos(),entity.data.sound.start_attack);
 	end
 end
 
@@ -471,7 +471,7 @@ function fighting.restore_previous_state(entity,now)
 		--don't restore old movement target if not valid anymore
 		if entity.dynamic_data.movement.target == nil or
 			(not mobf_is_pos(entity.dynamic_data.movement.target) and
-			entity.dynamic_data.movement.target:getpos() == nil) then
+			entity.dynamic_data.movement.target:get_pos() == nil) then
 			entity.dynamic_data.movement.target = nil
 		end
 
@@ -546,7 +546,7 @@ function fighting.combat(entity,now,dtime)
 		--check if target is still valid
 		if not entity.dynamic_data.combat.target:is_player() then
 			local target_entity = entity.dynamic_data.combat.target:get_luaentity()
-			local target_pos    = entity.dynamic_data.combat.target:getpos()
+			local target_pos    = entity.dynamic_data.combat.target:get_pos()
 
 			--print("MOBF: target is not player checking if stil valid: "
 			--		.. dump(target_entity) .. " " .. dump(target_pos))
@@ -579,7 +579,7 @@ function fighting.combat(entity,now,dtime)
 
 			--make mob run away
 			if old_target ~= nil then
-				local dir        = mobf_get_direction(old_target:getpos(),entity.object:getpos())
+				local dir        = mobf_get_direction(old_target:get_pos(),entity.object:get_pos())
 				fighting.run_away(entity,dir,old_target)
 			end
 			return true
@@ -594,8 +594,8 @@ function fighting.combat(entity,now,dtime)
 
 
 		--calculate some basic data
-		local mob_pos    = entity.object:getpos()
-		local targetpos  = entity.dynamic_data.combat.target:getpos()
+		local mob_pos    = entity.object:get_pos()
+		local targetpos  = entity.dynamic_data.combat.target:get_pos()
 		local distance   = mobf_calc_distance(mob_pos,targetpos)
 		local dir        = mobf_get_direction(targetpos,mob_pos)
 		local target     = entity.dynamic_data.combat.target
@@ -705,7 +705,7 @@ function fighting.get_target(entity)
 		end
 
 		local objectlist = minetest.get_objects_inside_radius(
-												entity.object:getpos(),range)
+												entity.object:get_pos(),range)
 
 		local count = 0
 
@@ -768,8 +768,8 @@ function fighting.get_target(entity)
 
 	for i,v in ipairs(possible_targets) do
 
-		local entity_pos = entity.object:getpos()
-		local target_pos = v:getpos()
+		local entity_pos = entity.object:get_pos()
+		local target_pos = v:get_pos()
 
 		--is there a line of sight between mob and possible target
 		--line of sight is calculated 1block above ground
@@ -786,7 +786,7 @@ function fighting.get_target(entity)
 
 	for i,v in ipairs(targets_within_sight) do
 
-		local distance = mobf_calc_distance(entity.object:getpos(),v:getpos())
+		local distance = mobf_calc_distance(entity.object:get_pos(),v:get_pos())
 
 		if min_distance < 0 or
 			distance < min_distance then
@@ -943,7 +943,7 @@ function fighting.self_destruct_handler(entity,now)
 	if entity.data.combat ~= nil and
 		entity.data.combat.self_destruct ~= nil then
 
-		local pos = entity.object:getpos()
+		local pos = entity.object:get_pos()
 
 		dbg_mobf.fighting_lvl1("MOBF: checking for self destruct imminent")
 		--do self destruct
@@ -1027,7 +1027,7 @@ function fighting.melee_attack_handler(entity,now,distance)
 	end
 
 	mobf_assert_backtrace( entity.dynamic_data.combat.target ~= nil)
-	local ownpos = entity.object:getpos()
+	local ownpos = entity.object:get_pos()
 	local target_obj = entity.dynamic_data.combat.target.object
 
 	if target_obj == nil then
@@ -1035,13 +1035,13 @@ function fighting.melee_attack_handler(entity,now,distance)
 	end
 
 	if distance <= entity.data.combat.melee.range
-		and mobf_line_of_sight(ownpos,target_obj:getpos()) then
+		and mobf_line_of_sight(ownpos,target_obj:get_pos()) then
 
 		--save time of attack
 		entity.dynamic_data.combat.ts_last_attack = now
 
 		if entity.data.sound ~= nil then
-			sound.play(entity.object:getpos(),entity.data.sound.melee);
+			sound.play(entity.object:get_pos(),entity.data.sound.melee);
 		end
 
 		--calculate damage to be done
@@ -1218,7 +1218,7 @@ function fighting.sun_damage_handler(entity,now)
 		entity.data.combat.sun_sensitive then
 		mobf_assert_backtrace(entity.dynamic_data.combat ~= nil)
 
-		local pos = entity.object:getpos()
+		local pos = entity.object:get_pos()
 		local current_state = entity.dynamic_data.state.current
 		local current_light = minetest.get_node_light(pos)
 

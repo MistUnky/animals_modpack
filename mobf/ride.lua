@@ -294,7 +294,7 @@ end
 minetest.register_on_leaveplayer( function(player)
 	if player ~= nil and
 		player.object ~= nil then
-		local pos = player.object:getpos()
+		local pos = player.object:get_pos()
 
 		--print("MOBF: got player position: " ..printpos(pos) )
 

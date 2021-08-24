@@ -98,7 +98,7 @@ function mobf_add_mob(mob)
 			replacement_name = mob.modname .. ":"..mob.name,
 			on_activate = function(self,staticdata)
 
-					local pos = self.object:getpos()
+					local pos = self.object:get_pos()
 
 					if pos ~= nil then
 						local newobject = minetest.add_entity(pos,self.replacement_name)

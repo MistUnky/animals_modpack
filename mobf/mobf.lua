@@ -258,7 +258,7 @@ end
 --! @return basepos of mob
 -------------------------------------------------------------------------------
 function mobf.get_basepos(entity)
-	local pos = entity.object:getpos()
+	local pos = entity.object:get_pos()
 	local nodeatpos = minetest.get_node(pos)
 
 	dbg_mobf.mobf_core_helper_lvl3("MOBF: " .. entity.data.name
@@ -315,7 +315,7 @@ function mobf.activate_handler(self,staticdata)
 		return
 	end
 	--do some initial checks
-	local pos = self.object:getpos()
+	local pos = self.object:get_pos()
 
 	if pos == nil then
 		mobf_bug_warning(LOGLEVEL_ERROR,"MOBF: mob at nil pos!")
@@ -626,7 +626,7 @@ function mobf.register_entity(name, cur_graphics, mob)
 				end
 
 				if (self.dynamic_data.initialized ~= true) then
-					if entity_at_loaded_pos(self.object:getpos(),self.data.name) then
+					if entity_at_loaded_pos(self.object:get_pos(),self.data.name) then
 						mobf.activate_handler(self,self.dynamic_data.last_static_data)
 
 						--if quota is exceeded activation is delayed don't continue
@@ -751,7 +751,7 @@ function mobf.register_entity(name, cur_graphics, mob)
 					end
 
 					--make sure entity is in loaded area at initialization
-					local pos = self.object:getpos()
+					local pos = self.object:get_pos()
 
 					--remove from mob offline storage
 					spawning.activate_mob(self.data.modname .. ":"  .. self.data.name,pos)
@@ -822,7 +822,7 @@ function mobf.register_entity(name, cur_graphics, mob)
 		--NOTE this isn't called if a object is deleted
 		get_staticdata = function(self)
 			--add to mob offline storage
-			spawning.deactivate_mob(self.data.modname .. ":"  .. self.data.name,self.object:getpos())
+			spawning.deactivate_mob(self.data.modname .. ":"  .. self.data.name,self.object:get_pos())
 			return mobf_serialize_permanent_entity_data(self)
 			end,
 

@@ -113,7 +113,7 @@ function mobf_debug.spawn_mob(name,param)
 			return
 		end
 
-		local pos = player:getpos()
+		local pos = player:get_pos()
 
 		if pos == nil then
 			return
@@ -157,7 +157,7 @@ function mobf_debug.list_active_mobs(name,param)
 	for index,value in pairs(minetest.luaentities) do
 		if value.data ~= nil and value.data.name ~= nil then
 			local tosend = count .. ": " .. value.data.name .. " at "
-				.. printpos(value.object:getpos())
+				.. printpos(value.object:get_pos())
 			print(tosend)
 			minetest.chat_send_player(name,tosend)
 			count = count +1
@@ -179,7 +179,7 @@ function mobf_debug.list_spawners(name,param)
 		if value ~= nil and value.spawner_mob_name ~= nil then
 			local resultline = "SPW: "
 				.. mobf_fixed_size_string(value.spawner_mob_name,24) .. " "
-				.. mobf_fixed_size_string(printpos(value.object:getpos()),16)
+				.. mobf_fixed_size_string(printpos(value.object:get_pos()),16)
 				.. "  STATE: "
 				.. mobf_fixed_size_string(dump(value.spawner_last_result),32)
 				.. " TIME: " .. value.spawner_time_passed
@@ -390,7 +390,7 @@ function mobf_debug.rightclick_callback(entity,player)
 			local targetpos = entity.dynamic_data.spawning.spawnpoint
 			if entity.dynamic_data.movement.target ~= nil then
 				if not mobf_is_pos(entity.dynamic_data.movement.target) then
-					targetpos = entity.dynamic_data.movement.target:getpos()
+					targetpos = entity.dynamic_data.movement.target:get_pos()
 				else
 					targetpos = entity.dynamic_data.movement.target
 				end
@@ -427,7 +427,7 @@ function mobf_debug.rightclick_callback(entity,player)
 					spawning.spawn_and_check("mobf:path_marker_entity",v,"mark_path")
 				end
 			end
-			print("MOBF: \t\tdistance to next point:      " .. p_mov_gen.distance_to_next_point(entity,entity.object:getpos()))
+			print("MOBF: \t\tdistance to next point:      " .. p_mov_gen.distance_to_next_point(entity,entity.object:get_pos()))
 		end
 	end
 

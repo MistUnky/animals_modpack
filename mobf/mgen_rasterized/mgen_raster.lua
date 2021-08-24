@@ -145,7 +145,7 @@ end
 -------------------------------------------------------------------------------
 function mgen_raster.init_dynamic_data(entity,now)
 
-	local pos = entity.object:getpos()
+	local pos = entity.object:get_pos()
 
 	local data = {
 			target = nil,

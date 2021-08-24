@@ -57,7 +57,7 @@ local function egg_timeout(entity)
 			tospawn = "animal_chicken:chick_m"
 		end
 
-		local eggpos = entity.object:getpos()
+		local eggpos = entity.object:get_pos()
 
 		if (mobf_mob_around(
 						"animal_chicken:rooster",

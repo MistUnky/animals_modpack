@@ -104,7 +104,7 @@ end
 
 function breed(breedpairs,self,now)
 
-	local pos = self.object:getpos()
+	local pos = self.object:get_pos()
 	local objectlist = minetest.get_objects_inside_radius(pos,2)
 	local le_animal1 = nil
 	local le_animal2 = nil
@@ -147,9 +147,9 @@ function breed(breedpairs,self,now)
 		self.last_breed_time > 0 and
 		le_animal1 ~= nil and
 		le_animal2 ~= nil then
-		local pos1 = le_animal1.object:getpos()
-		local pos2 = le_animal2.object:getpos()
-		local pos = self.object:getpos()
+		local pos1 = le_animal1.object:get_pos()
+		local pos2 = le_animal2.object:get_pos()
+		local pos = self.object:get_pos()
 		local pos_to_breed = {
 								x = pos1.x + (pos2.x - pos1.x) /2,
 								y = pos1.y,
@@ -204,7 +204,7 @@ minetest.register_entity(":barn:barn_ent",
 
 
 				if breed(breedpairs,self,now) then
-					local pos = self.object:getpos()
+					local pos = self.object:get_pos()
 					--remove barn and add empty one
 					self.object:remove()
 
@@ -263,7 +263,7 @@ minetest.register_entity(":barn:barn_empty_ent",
 
 			if is_food(tool:get_name()) then
 				local time_of_last_breed = self.last_breed_time
-				local pos = self.object:getpos()
+				local pos = self.object:get_pos()
 
 				self.object:remove()
 
@@ -310,7 +310,7 @@ minetest.register_entity(":barn:barn_small_ent",
 
 
 				if breed(breedpairs,self,now) then
-					local pos = self.object:getpos()
+					local pos = self.object:get_pos()
 					--remove barn and add empty one
 					self.object:remove()
 
@@ -361,7 +361,7 @@ minetest.register_entity(":barn:barn_small_empty_ent",
 
 			if is_food(tool:get_name()) then
 				local time_of_last_breed = self.last_breed_time
-				local pos = self.object:getpos()
+				local pos = self.object:get_pos()
 
 				self.object:remove()
 

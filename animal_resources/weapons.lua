@@ -192,7 +192,7 @@ end
 --! @param dtime time since last callback
 -------------------------------------------------------------------------------
 function AR_FIREBALL_ENTITY.on_step(self, dtime)
-	local pos = self.object:getpos()
+	local pos = self.object:get_pos()
 	local node = core.get_node(pos)
 
 
@@ -286,7 +286,7 @@ end
 --! @param dtime time since last callback
 -------------------------------------------------------------------------------
 function AR_PLASMABALL_ENTITY.on_step(self, dtime)
-	local pos = self.object:getpos()
+	local pos = self.object:get_pos()
 	local node = core.get_node(pos)
 
 
@@ -382,7 +382,7 @@ local AR_ARROW_ENTITY={
 -------------------------------------------------------------------------------
 AR_ARROW_ENTITY.on_step = function(self, dtime)
 	self.timer=self.timer+dtime
-	local pos = self.object:getpos()
+	local pos = self.object:get_pos()
 	local node = core.get_node(pos)
 
 	if self.timer>0.2 then

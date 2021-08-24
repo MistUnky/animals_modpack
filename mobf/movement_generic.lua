@@ -40,7 +40,7 @@ function movement_generic.get_accel_to(new_pos, entity, ymovement, accel)
 			"MOBF: movement_generic.get_accel_to : Invalid parameters")
 	end
 
-	local old_pos  = entity.object:getpos()
+	local old_pos  = entity.object:get_pos()
 	local node 	   = minetest.get_node(old_pos)
 	local maxaccel = entity.data.movement.max_accel
 	local minaccel = entity.data.movement.min_accel

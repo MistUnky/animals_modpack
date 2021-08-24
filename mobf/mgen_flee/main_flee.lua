@@ -179,7 +179,7 @@ function mgen_flee.callback(entity,now)
 			dbg_mobf.flmovement_lvl3("MOBF:   have moving target")
 
 			if not mobf_is_pos(entity.dynamic_data.movement.target) then
-				targetpos = entity.dynamic_data.movement.target:getpos()
+				targetpos = entity.dynamic_data.movement.target:get_pos()
 			else
 				targetpos = entity.dynamic_data.movement.target
 			end
@@ -334,7 +334,7 @@ end
 -------------------------------------------------------------------------------
 function mgen_flee.init_dynamic_data(entity,now)
 
-	local pos = entity.object:getpos()
+	local pos = entity.object:get_pos()
 
 
 	local data = {

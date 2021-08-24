@@ -47,7 +47,7 @@ end
 --! @param dtime time since last callback
 -------------------------------------------------------------------------------
 function vombie_flame.on_step(self, dtime)
-	local pos = self.object:getpos()
+	local pos = self.object:get_pos()
 	local node = minetest.get_node(pos)
 	
 	self.leveldtime = self.leveldtime + dtime

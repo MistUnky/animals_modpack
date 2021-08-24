@@ -525,7 +525,7 @@ function mob_state.BuiltinHungerPrecondition(mob)
 			mobf_assert_backtrace(state ~= nil)
 			mobf_assert_backtrace(state.name == "RSVD_hunger")
 
-			local pos = entity.object:getpos()
+			local pos = entity.object:get_pos()
 			--mobf_print("MOBF: trying to find " ..
 			--				dump(mob.hunger.target_nodes) .. " or " ..
 			--				dump(mob.hunger.target_entities) ..

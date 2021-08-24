@@ -51,7 +51,7 @@ function p_mov_gen.callback(entity,now,dstep)
 		end
 	end
 
-	local current_pos = entity.object:getpos()
+	local current_pos = entity.object:get_pos()
 	local handled = false
 
 	if entity.dynamic_data.p_movement.path == nil then
@@ -162,7 +162,7 @@ end
 -------------------------------------------------------------------------------
 function p_mov_gen.init_dynamic_data(entity,now,restored_data)
 
-	local pos = entity.object:getpos()
+	local pos = entity.object:get_pos()
 
 	local data = {
 			path                = nil,
@@ -289,13 +289,13 @@ function p_mov_gen.set_target(entity, target, follow_speedup, max_distance)
 
 	if not mobf_is_pos(target) then
 		if target:is_player() then
-			targetpos = target:getpos()
+			targetpos = target:get_pos()
 			targetpos.y = targetpos.y +0.5
 		else
 			if type(target.getbasepos) == "function" then
 				targetpos = target.getbasepos(target)
 			else
-				targetpos = target:getpos()
+				targetpos = target:get_pos()
 			end
 		end
 	else

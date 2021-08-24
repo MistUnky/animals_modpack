@@ -161,7 +161,7 @@ minetest.register_entity("animal_big_red:big_red_spawner_shadows",
 	textures        = { "invisible.png^[makealpha:128,0,0^[makealpha:128,128,0" },
 	on_activate = function(self,staticdata)
 
-		local pos = self.object:getpos();
+		local pos = self.object:get_pos();
 		minetest.add_entity(pos,"mobf:compat_spawner")
 		self.object:remove()
 	end,

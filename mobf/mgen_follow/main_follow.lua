@@ -297,7 +297,7 @@ function mgen_follow.callback(entity,now)
 			dbg_mobf.fmovement_lvl3("MOBF:   have moving target")
 
 			if not mobf_is_pos(entity.dynamic_data.movement.target) then
-				targetpos = entity.dynamic_data.movement.target:getpos()
+				targetpos = entity.dynamic_data.movement.target:get_pos()
 			else
 				targetpos = entity.dynamic_data.movement.target
 			end
@@ -323,9 +323,9 @@ function mgen_follow.callback(entity,now)
 		if entity.data.movement.canfly then
 			--real pos is relevant not basepos for flying mobs
 			--target for flying mobs is always slightly above it's target
-			distance = mobf_calc_distance(entity.object:getpos(),
+			distance = mobf_calc_distance(entity.object:get_pos(),
 				{x=targetpos.x, y=(targetpos.y+1), z=targetpos.z })
-			height_distance = entity.object:getpos().y - (targetpos.y+1)
+			height_distance = entity.object:get_pos().y - (targetpos.y+1)
 		else
 			distance = mobf_calc_distance_2d(basepos,targetpos)
 		end
@@ -402,7 +402,7 @@ function mgen_follow.callback(entity,now)
 					local pos_state  =
 						environment.pos_is_ok(predicted_pos,entity)
 					if pos_state == "collision_jumpable" then
-						local pos_to_set = entity.object:getpos()
+						local pos_to_set = entity.object:get_pos()
 						pos_to_set.y = pos_to_set.y + 1.1
 						entity.object:moveto(pos_to_set)
 						basepos.y=basepos.y+1.1
@@ -545,7 +545,7 @@ end
 -------------------------------------------------------------------------------
 function mgen_follow.init_dynamic_data(entity,now)
 
-	local pos = entity.object:getpos()
+	local pos = entity.object:get_pos()
 
 
 	local data = {

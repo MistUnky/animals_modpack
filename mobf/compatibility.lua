@@ -70,7 +70,7 @@ minetest.register_entity("mobf:compat_spawner",
 		groups          = { "immortal" },
 		on_activate     =
 			function(self,staticdata,dtime_s)
-				local pos = self.object:getpos()
+				local pos = self.object:get_pos()
 				local delta,y_offset = adv_spawning.get_spawner_density()
 
 				local spawnerpos = {

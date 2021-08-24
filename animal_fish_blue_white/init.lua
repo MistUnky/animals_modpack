@@ -125,7 +125,7 @@ minetest.register_entity("animal_fish_blue_white:fish_blue_white_spawner_shallow
 	textures        = { "invisible.png^[makealpha:128,0,0^[makealpha:128,128,0" },
 	on_activate = function(self,staticdata)
 
-		local pos = self.object:getpos();
+		local pos = self.object:get_pos();
 		minetest.add_entity(pos,"mobf:compat_spawner")
 		self.object:remove()
 	end,

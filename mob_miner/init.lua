@@ -129,7 +129,7 @@ local miner_activate = function(entity)
 end
 
 mob_miner.stepforward  = function(entity)
-    local pos = entity.object:getpos()
+    local pos = entity.object:get_pos()
     local basepos = entity:getbasepos()
     local direction = entity:getDirection()
     

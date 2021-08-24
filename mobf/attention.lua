@@ -140,7 +140,7 @@ function attention.callback(entity,now)
 	local new_objecttable = entity.dynamic_data.attention.watched_objects
 
 	entity.dynamic_data.attention.watched_objects = new_objecttable
-	local own_pos = entity.object:getpos()
+	local own_pos = entity.object:get_pos()
 
 	--get list of all objects in attention range
 	local objectlist =
@@ -162,7 +162,7 @@ function attention.callback(entity,now)
 			end
 
 			if continue then
-				local remote_pos = objectlist[i]:getpos()
+				local remote_pos = objectlist[i]:get_pos()
 
 				local hear_addon = false
 				local own_view_addon = false

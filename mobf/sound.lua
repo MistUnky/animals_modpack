@@ -125,7 +125,7 @@ function sound.play_random(entity,now)
 		end
 			
 		if toplay ~= nil then
-			sound.play(entity.object:getpos(),toplay)
+			sound.play(entity.object:get_pos(),toplay)
 			entity.dynamic_data.sound.random_last = now
 			dbg_mobf.sound_lvl3("MOBF: playing sound: " .. toplay.name)
 		end

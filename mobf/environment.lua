@@ -1058,7 +1058,7 @@ function environment.fix_base_pos(entity, center_to_bottom)
 
 	if center_to_bottom > 0.5 then
 
-		local pos = entity.object:getpos()
+		local pos = entity.object:get_pos()
 
 		local node_pos = minetest.get_node(pos)
 

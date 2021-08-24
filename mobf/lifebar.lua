@@ -74,7 +74,7 @@ end
 --! @return reference to lifebar added
 -------------------------------------------------------------------------------
 function mobf_lifebar.add(entity)
-	local pos = entity.object:getpos()
+	local pos = entity.object:get_pos()
 	local BS = 10
 
 	local lifebar_offset = (MAX(entity.collisionbox[4]-entity.collisionbox[1],

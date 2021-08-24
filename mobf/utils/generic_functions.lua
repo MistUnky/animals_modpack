@@ -361,7 +361,7 @@ function mobf_spawner_around(mob_name,pos,range)
 
 		local entity = value:get_luaentity()
 
-		dbg_mobf.generic_lvl3("MOBF: entity at: "..dump(value:getpos())..
+		dbg_mobf.generic_lvl3("MOBF: entity at: "..dump(value:get_pos())..
 							" looking for: "..mob_name .. " " ..
 							dump(value) .. " " ..
 							dump(entity))

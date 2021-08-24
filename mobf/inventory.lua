@@ -490,7 +490,7 @@ function mob_inventory.trader_callback(entity, player)
 
 	if mob_inventory.formspecs["formspec_" .. unique_entity_id] ~= nil then
 	
-		local pos = entity.object:getpos()
+		local pos = entity.object:get_pos()
 		
 		if pos == nil then
 			dbg_mobf.trader_inv_lvl1("MOBF: unable to get trader pos")
@@ -499,7 +499,7 @@ function mob_inventory.trader_callback(entity, player)
 		end
 	
 		--rotate mob to face player
-		local direction = mobf_get_direction(pos, player:getpos())
+		local direction = mobf_get_direction(pos, player:get_pos())
 
 		if entity.mode == "3d" then
 			graphics.setyaw(entity,

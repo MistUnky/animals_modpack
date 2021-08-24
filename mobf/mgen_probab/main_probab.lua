@@ -107,7 +107,7 @@ function movement_gen.callback(entity)
 	local movement_state = {
 		basepos         = entity.getbasepos(entity),
 		default_y_accel = nil,
-		centerpos       = entity.object:getpos(),
+		centerpos       = entity.object:get_pos(),
 		current_acceleration    = nil,
 		current_velocity        = entity.object:getvelocity(),
 		now             = nil,
@@ -310,7 +310,7 @@ end
 function movement_gen.init_dynamic_data(entity,now)
 
 	local accel_to_set = {x=0,y=9.81,z=0}
-	local pos = entity.object:getpos()
+	local pos = entity.object:get_pos()
 
 		--initialize acceleration values
 	accel_to_set.y = environment.get_default_gravity(pos,

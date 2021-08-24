@@ -260,7 +260,7 @@ end
 --! @param reason text to log as reason for removal
 -------------------------------------------------------------------------------
 function spawning.remove(entity,reason)
-	local pos = entity.object:getpos()
+	local pos = entity.object:get_pos()
 	dbg_mobf.spawning_lvl3("MOBF: --> remove " .. printpos(pos))
 	if entity ~= nil then
 		entity.removed = true
@@ -306,7 +306,7 @@ function spawning.init_dynamic_data(entity,now)
 	local data = {
 		player_spawned     = player_spawned,
 		ts_dense_check     = now,
-		spawnpoint         = entity.object:getpos(),
+		spawnpoint         = entity.object:get_pos(),
 		original_spawntime = now,
 		spawner            = nil,
 		density            = spawning.population_density_get_min(entity),
@@ -361,7 +361,7 @@ function spawning.population_density_check(entity,now)
 
 	entity.dynamic_data.spawning.ts_dense_check = now
 
-	local entitypos = mobf_round_pos(entity.object:getpos())
+	local entitypos = mobf_round_pos(entity.object:get_pos())
 
 	--mob either not initialized completely or a bug
 	if mobf_pos_is_zero(entitypos) then
@@ -639,7 +639,7 @@ function spawning.check_activation_overlap(entity,pos,preserved_data)
 						dbg_mobf.mobf_core_helper_lvl3(
 							i .. " LE: " .. luaentity.name .. " (" .. tostring(luaentity) .. ") " ..
 						luaentity.data.name .. " " ..
-						printpos(objectlist[i]:getpos()))
+						printpos(objectlist[i]:get_pos()))
 					else
 						dbg_mobf.mobf_core_helper_lvl3(
 							i .. " LE: " .. luaentity.name .. " (" .. tostring(luaentity) .. ") " ..
@@ -648,7 +648,7 @@ function spawning.check_activation_overlap(entity,pos,preserved_data)
 				else
 					dbg_mobf.mobf_core_helper_lvl3(
 						i .. " " .. tostring(objectlist[i]) ..
-						printpos(objectlist[i]:getpos()))
+						printpos(objectlist[i]:get_pos()))
 				end
 			end
 			------------------------------

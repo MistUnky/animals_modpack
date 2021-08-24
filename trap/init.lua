@@ -50,7 +50,7 @@ minetest.register_entity(":trap:undead_ent",
 			
 			if now ~= self.last_check_time then
 			
-				local pos = self.object:getpos()
+				local pos = self.object:get_pos()
 			
 				local objectlist = minetest.get_objects_inside_radius(pos,2)
 				

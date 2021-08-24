@@ -73,18 +73,18 @@ function mgen_jordan4ibanez.callback(entity,now)
     --open a door [alpha]
     if entity.dynamic_data.movement.direction ~= nil then
         if entity.dynamic_data.movement.door_timer > 2 then
-            local is_a_door = minetest.get_node({x=entity.object:getpos().x + entity.dynamic_data.movement.direction.x,
-            										 y=entity.object:getpos().y,z=entity.object:getpos().
+            local is_a_door = minetest.get_node({x=entity.object:get_pos().x + entity.dynamic_data.movement.direction.x,
+            										 y=entity.object:get_pos().y,z=entity.object:get_pos().
             										 z + entity.dynamic_data.movement.direction.z}).name
             if is_a_door == "doors:door_wood_t_1" then
-                minetest.punch_node({x=entity.object:getpos().x + entity.dynamic_data.movement.direction.x,
-                						 y=entity.object:getpos().y-1,
-                						 z=entity.object:getpos().z + entity.dynamic_data.movement.direction.z})
+                minetest.punch_node({x=entity.object:get_pos().x + entity.dynamic_data.movement.direction.x,
+                						 y=entity.object:get_pos().y-1,
+                						 z=entity.object:get_pos().z + entity.dynamic_data.movement.direction.z})
                 entity.dynamic_data.movement.door_timer = 0
             end
-            local is_in_door = minetest.get_node(entity.object:getpos()).name
+            local is_in_door = minetest.get_node(entity.object:get_pos()).name
             if is_in_door == "doors:door_wood_t_1" then
-                minetest.punch_node(entity.object:getpos())
+                minetest.punch_node(entity.object:get_pos())
             end
         end
     end
@@ -92,9 +92,9 @@ function mgen_jordan4ibanez.callback(entity,now)
     --jump
     if entity.dynamic_data.movement.direction ~= nil then
         if entity.dynamic_data.movement.jump_timer > 0.3 then
-            if minetest.registered_nodes[minetest.get_node({x=entity.object:getpos().x + entity.dynamic_data.movement.direction.x,
-            													y=entity.object:getpos().y-1,
-            													z=entity.object:getpos().z + entity.dynamic_data.movement.direction.z}).name].walkable then
+            if minetest.registered_nodes[minetest.get_node({x=entity.object:get_pos().x + entity.dynamic_data.movement.direction.x,
+            													y=entity.object:get_pos().y-1,
+            													z=entity.object:get_pos().z + entity.dynamic_data.movement.direction.z}).name].walkable then
                 entity.object:setvelocity({x=entity.object:getvelocity().x,y=5,z=entity.object:getvelocity().z})
                 entity.dynamic_data.movement.jump_timer = 0
             end

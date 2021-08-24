@@ -235,7 +235,7 @@ function adv_spawning.global_onstep(dtime)
 					
 					for k,v in ipairs(playerlist) do
 						if not adv_spawning.time_over(10) then
-							adv_spawning.refresh_spawners(v:getpos())
+							adv_spawning.refresh_spawners(v:get_pos())
 						else
 							break
 						end
@@ -1385,7 +1385,7 @@ function adv_spawning.check_active_block(pos)
 	local players = minetest.get_connected_players()
 
 	for i=1,#players,1 do
-		if vector.distance(pos,players[i]:getpos()) < adv_spawning.active_range then
+		if vector.distance(pos,players[i]:get_pos()) < adv_spawning.active_range then
 			return true
 		end
 	end

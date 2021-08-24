@@ -71,7 +71,7 @@ end
 
 function vombie_on_activate_handler(entity)
 
-	local pos = entity.object:getpos()
+	local pos = entity.object:get_pos()
 
 	local current_light = minetest.get_node_light(pos)
 
@@ -214,7 +214,7 @@ minetest.register_entity("animal_vombie:vombie_spawner",
 	textures        = { "invisible.png^[makealpha:128,0,0^[makealpha:128,128,0" },
 	on_activate = function(self,staticdata)
 
-		local pos = self.object:getpos();
+		local pos = self.object:get_pos();
 		minetest.add_entity(pos,"mobf:compat_spawner")
 		self.object:remove()
 	end,
@@ -228,7 +228,7 @@ minetest.register_entity("animal_vombie:vombie_spawner_at_night",
 	textures        = { "invisible.png^[makealpha:128,0,0^[makealpha:128,128,0" },
 	on_activate = function(self,staticdata)
 
-		local pos = self.object:getpos();
+		local pos = self.object:get_pos();
 		minetest.add_entity(pos,"mobf:compat_spawner")
 		self.object:remove()
 	end,
@@ -242,7 +242,7 @@ minetest.register_entity("animal_vombie:vombie_spawner_shadows",
 	textures        = { "invisible.png^[makealpha:128,0,0^[makealpha:128,128,0" },
 	on_activate = function(self,staticdata)
 
-		local pos = self.object:getpos();
+		local pos = self.object:get_pos();
 		minetest.add_entity(pos,"mobf:compat_spawner")
 		self.object:remove()
 	end,

@@ -67,7 +67,7 @@ function adv_spawning.seed_step(self,dtime)
 
 			while tries > 0 do
 				local successfull, permanent_error, reason =
-					adv_spawning.handlespawner(key,self.object:getpos())
+					adv_spawning.handlespawner(key,self.object:get_pos())
 
 				if successfull then
 					self.spawning_data[key] =
@@ -135,7 +135,7 @@ function adv_spawning.seed_activate(self)
 		self.activated = true
 		
 		-- fix unaligned own pos
-		local pos = self.object:getpos()
+		local pos = self.object:get_pos()
 		
 		pos.x = math.floor(pos.x + 0.5)
 		pos.y = math.floor(pos.y + 0.5)
@@ -244,7 +244,7 @@ end
 --------------------------------------------------------------------------------
 function adv_spawning.seed_check_for_collision(self)
 	assert(self ~= nil)
-	local pos = self.object:getpos()
+	local pos = self.object:get_pos()
 	local objects = minetest.get_objects_inside_radius(pos, 0.5)
 	
 	if objects == nil then
@@ -374,7 +374,7 @@ function adv_spawning.seed_scan_for_applyable_spawners(self)
 		runindex = self.spawner_init_idx
 	end
 	
-	local pos = self.object:getpos()
+	local pos = self.object:get_pos()
 	for key,value in pairs(adv_spawning.spawner_definitions) do
 		if not adv_spawning.quota_enter() then
 			return false
