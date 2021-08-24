@@ -1065,8 +1065,8 @@ function mobf.blacklisthandling(mob)
 		end
 	else
 		on_activate_fct = function(self,staticdata)
-				self.object:setacceleration({x=0,y=0,z=0})
-				self.object:setvelocity({x=0,y=0,z=0})
+				self.object:set_acceleration({x=0,y=0,z=0})
+				self.object:set_velocity({x=0,y=0,z=0})
 			end
 	end
 

@@ -142,7 +142,7 @@ function mgen_flee.callback(entity,now)
 
 	if pos_quality.level_quality ~= LQ_OK and
 		entity.data.movement.canfly then
-		local current_accel = entity.object:getacceleration()
+		local current_accel = entity.object:get_acceleration()
 
 		if pos_quality.level_quality == LQ_ABOVE then
 			if current_accel.y >= 0 then
@@ -151,22 +151,22 @@ function mgen_flee.callback(entity,now)
 		end
 
 		if pos_quality.level_quality == LQ_BELOW then
-			local current_accel = entity.object:getacceleration()
+			local current_accel = entity.object:get_acceleration()
 			if current_accel.y <= 0 then
 				current_accel.y = entity.data.movement.max_accel
 			end
 		end
 
-		entity.object:setacceleration(current_accel)
+		entity.object:set_acceleration(current_accel)
 		return
 	end
 
 	--fixup height
-	local current_accel = entity.object:getacceleration()
+	local current_accel = entity.object:get_acceleration()
 	if entity.data.movement.canfly then
 		if current_accel.y ~= 0 then
 			current_accel.y = 0
-			entity.object:setacceleration(current_accel)
+			entity.object:set_acceleration(current_accel)
 		end
 	end
 
@@ -201,7 +201,7 @@ function mgen_flee.callback(entity,now)
 			--return
 		end
 
-		local current_velocity = entity.object:getvelocity()
+		local current_velocity = entity.object:get_velocity()
 		local predicted_pos =
 			movement_generic.predict_next_block(basepos,current_velocity,current_accel)
 		local current_distance = mobf_calc_distance(targetpos,basepos)
@@ -239,7 +239,7 @@ function mgen_flee.callback(entity,now)
 				if jump_required then
 					local jumpvel = current_velocity
 					jumpvel.y = 5
-					entity.object:setvelocity(jumpvel)
+					entity.object:set_velocity(jumpvel)
 				end
 			else
 				dbg_mobf.flmovement_lvl2("MOBF: didn't find a way to flee, stopping")
@@ -294,7 +294,7 @@ function mgen_flee.next_block_ok(entity,pos,acceleration,velocity)
 	local current_velocity = velocity
 
 	if current_velocity == nil then
-		current_velocity = entity.object:getvelocity()
+		current_velocity = entity.object:get_velocity()
 	end
 
 	local predicted_pos = movement_generic.predict_next_block(pos,current_velocity,acceleration)
@@ -356,7 +356,7 @@ end
 -------------------------------------------------------------------------------
 function mgen_flee.checkspeed(entity)
 
-	local current_velocity = entity.object:getvelocity()
+	local current_velocity = entity.object:get_velocity()
 
 	local xzspeed =
 		mobf_calc_scalar_speed(current_velocity.x,current_velocity.z)
@@ -369,7 +369,7 @@ function mgen_flee.checkspeed(entity)
 
 		velocity_to_set.y=current_velocity.y
 
-		entity.object:setvelocity(velocity_to_set)
+		entity.object:set_velocity(velocity_to_set)
 
 		return true
 	end
@@ -403,21 +403,21 @@ function mgen_flee.set_acceleration(entity,accel,speedup,pos)
 
 	if mgen_flee.next_block_ok(entity,pos,accel) then
 		dbg_mobf.flmovement_lvl3("MOBF:   flee setting acceleration to: " .. printpos(accel));
-		entity.object:setacceleration(accel)
+		entity.object:set_acceleration(accel)
 		return true
 	elseif mgen_flee.next_block_ok(entity,pos,{x=0,y=0,z=0}) then
 		accel = {x=0,y=0,z=0}
 		dbg_mobf.flmovement_lvl3("MOBF:   flee setting acceleration to: " .. printpos(accel));
-		entity.object:setacceleration(accel)
+		entity.object:set_acceleration(accel)
 		return true
 	else
-		local current_velocity = entity.object:getvelocity()
+		local current_velocity = entity.object:get_velocity()
 		current_velocity.y = 0
 
 		if mgen_flee.next_block_ok(entity,pos,{x=0,y=0,z=0},current_velocity) then
 			accel = {x=0,y=0,z=0}
-			entity.object:setvelocity(current_velocity)
-			entity.object:setacceleration(accel)
+			entity.object:set_velocity(current_velocity)
+			entity.object:set_acceleration(accel)
 			return true
 		end
 	end

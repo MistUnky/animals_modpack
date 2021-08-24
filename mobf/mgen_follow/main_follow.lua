@@ -132,8 +132,8 @@ function mgen_follow.handleteleport(entity,now,targetpos)
 				targetpos.y = targetpos.y - (entity.collisionbox[2] + 0.49)
 			end
 
-			entity.object:setvelocity({x=0,y=0,z=0})
-			entity.object:setacceleration({x=0,y=0,z=0})
+			entity.object:set_velocity({x=0,y=0,z=0})
+			entity.object:set_acceleration({x=0,y=0,z=0})
 			entity.object:moveto(targetpos)
 			entity.dynamic_data.movement.last_next_to_target = now
 			return true
@@ -255,7 +255,7 @@ function mgen_follow.callback(entity,now)
 		entity.dynamic_data.movement.invalid_env_count = 0
 	end
 
-	local current_accel = entity.object:getacceleration()
+	local current_accel = entity.object:get_acceleration()
 
 	if pos_quality.level_quality ~= LQ_OK and
 		entity.data.movement.canfly then
@@ -268,13 +268,13 @@ function mgen_follow.callback(entity,now)
 		end
 
 		if pos_quality.level_quality == LQ_BELOW then
-			local current_accel = entity.object:getacceleration()
+			local current_accel = entity.object:get_acceleration()
 			if current_accel.y <= 0 then
 				current_accel.y = entity.data.movement.max_accel
 			end
 		end
 
-		entity.object:setacceleration(current_accel)
+		entity.object:set_acceleration(current_accel)
 		return
 	end
 
@@ -282,7 +282,7 @@ function mgen_follow.callback(entity,now)
 	if entity.data.movement.canfly then
 		if current_accel.y ~= 0 then
 			current_accel.y = 0
-			entity.object:setacceleration(current_accel)
+			entity.object:set_acceleration(current_accel)
 		end
 	end
 
@@ -392,7 +392,7 @@ function mgen_follow.callback(entity,now)
 													follow_speedup,
 													basepos)
 				else
-					local current_velocity = entity.object:getvelocity()
+					local current_velocity = entity.object:get_velocity()
 					local predicted_pos =
 						movement_generic.predict_next_block(basepos,
 													current_velocity,
@@ -427,8 +427,8 @@ function mgen_follow.callback(entity,now)
 				local yaccel = environment.get_default_gravity(basepos,
 							entity.environment.media,
 							entity.data.movement.canfly)
-				--entity.object:setvelocity({x=0,y=0,z=0})
-				entity.object:setacceleration({x=0,y=yaccel,z=0})
+				--entity.object:set_velocity({x=0,y=0,z=0})
+				entity.object:set_acceleration({x=0,y=yaccel,z=0})
 			end
 			mgen_follow.update_animation(entity, "following")
 		--nothing to do
@@ -448,8 +448,8 @@ function mgen_follow.callback(entity,now)
 				current_accel.Y ~= yaccel then
 
 				dbg_mobf.fmovement_lvl3("MOBF: next to target")
-				entity.object:setvelocity({x=0,y=0,z=0})
-				entity.object:setacceleration({x=0,y=yaccel,z=0})
+				entity.object:set_velocity({x=0,y=0,z=0})
+				entity.object:set_acceleration({x=0,y=yaccel,z=0})
 				entity.dynamic_data.movement.last_next_to_target = now
 				mgen_follow.update_animation(entity, "ntt")
 			end
@@ -505,7 +505,7 @@ function mgen_follow.next_block_ok(entity,pos,acceleration,velocity)
 	local current_velocity = velocity
 
 	if current_velocity == nil then
-		current_velocity = entity.object:getvelocity()
+		current_velocity = entity.object:get_velocity()
 	end
 
 	local predicted_pos = movement_generic.predict_next_block(pos,current_velocity,acceleration)
@@ -581,7 +581,7 @@ end
 -------------------------------------------------------------------------------
 function mgen_follow.checkspeed(entity)
 
-	local current_velocity = entity.object:getvelocity()
+	local current_velocity = entity.object:get_velocity()
 
 	local xzspeed =
 		mobf_calc_scalar_speed(current_velocity.x,current_velocity.z)
@@ -594,11 +594,11 @@ function mgen_follow.checkspeed(entity)
 		--reduce speed to 90% of current speed
 		local new_speed = mobf_calc_vector_components(direction,xzspeed*0.9)
 
-		local current_accel = entity.object:getacceleration()
+		local current_accel = entity.object:get_acceleration()
 
 		new_speed.y = current_velocity.y
-		entity.object:setvelocity(new_speed)
-		entity.object:setacceleration({x=0,y=current_accel.y,z=0})
+		entity.object:set_velocity(new_speed)
+		entity.object:set_acceleration({x=0,y=current_accel.y,z=0})
 
 		return true
 	end
@@ -629,21 +629,21 @@ function mgen_follow.set_acceleration(entity,accel,speedup,pos)
 
 	if mgen_follow.next_block_ok(entity,pos,accel) then
 		dbg_mobf.fmovement_lvl3("MOBF:   setting acceleration to: " .. printpos(accel));
-		entity.object:setacceleration(accel)
+		entity.object:set_acceleration(accel)
 		return true
 	elseif mgen_follow.next_block_ok(entity,pos,{x=0,y=0,z=0}) then
 		accel = {x=0,y=0,z=0}
 		dbg_mobf.fmovement_lvl3("MOBF:   setting acceleration to: " .. printpos(accel));
-		entity.object:setacceleration(accel)
+		entity.object:set_acceleration(accel)
 		return true
 	else
-		local current_velocity = entity.object:getvelocity()
+		local current_velocity = entity.object:get_velocity()
 		current_velocity.y = 0
 
 		if mgen_follow.next_block_ok(entity,pos,{x=0,y=0,z=0},current_velocity) then
 			accel = {x=0,y=0,z=0}
-			entity.object:setvelocity(current_velocity)
-			entity.object:setacceleration(accel)
+			entity.object:set_velocity(current_velocity)
+			entity.object:set_acceleration(accel)
 			return true
 		end
 	end

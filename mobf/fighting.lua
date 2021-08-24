@@ -298,13 +298,13 @@ function fighting.run_away(entity,dir_to_enemy,enemy)
 		local fleevelocity     = mobf_calc_vector_components(dir_rad,
 										entity.data.movement.max_accel*2)
 
-		local current_accel    = entity.object:getacceleration()
-		local current_velocity = entity.object:getvelocity()
+		local current_accel    = entity.object:get_acceleration()
+		local current_velocity = entity.object:get_velocity()
 
 		mob_state.change_state(entity,new_state)
 
-		entity.object:setvelocity({x=0,y=current_velocity.y,z=0})
-		entity.object:setacceleration({
+		entity.object:set_velocity({x=0,y=current_velocity.y,z=0})
+		entity.object:set_acceleration({
 										x=fleevelocity.x,
 										y=current_accel.y,
 										z=fleevelocity.z}
@@ -1178,9 +1178,9 @@ function fighting.distance_attack_handler(entity,targetpos,mob_pos,now,distance)
 				dbg_mobf.fighting_lvl2("MOBF: throwing with velocity: " ..
 															printpos(vel_thrown))
 
-				newobject:setvelocity(vel_thrown)
+				newobject:set_velocity(vel_thrown)
 
-				newobject:setacceleration({x=0, y=-thrown_entity.gravity, z=0})
+				newobject:set_acceleration({x=0, y=-thrown_entity.gravity, z=0})
 				thrown_entity.owner = entity.object
 
 				if entity.data.sound ~= nil then

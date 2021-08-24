@@ -91,7 +91,7 @@ function graphics.update_animation(entity,now,dtime)
 		if animdata ~= nil and
 			animdata.basevelocity ~= nil then
 
-			local current_velocity = entity.object:getvelocity()
+			local current_velocity = entity.object:get_velocity()
 			local scalar_velocity = mobf_calc_scalar_speed(current_velocity.x,current_velocity.z)
 
 			if entity.dynamic_data.graphics.last_scalar_speed ~= nil then

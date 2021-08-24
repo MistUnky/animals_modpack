@@ -53,7 +53,7 @@ function mgen_jordan4ibanez.callback(entity,now)
     
     if entity.dynamic_data.movement.direction ~= nil then
         entity.object:setvelocity({x=entity.dynamic_data.movement.direction.x*mgen_jordan4ibanez.chillaxin_speed,
-        y=entity.object:getvelocity().y,
+        y=entity.object:get_velocity().y,
         z=entity.dynamic_data.movement.direction.z*mgen_jordan4ibanez.chillaxin_speed})
     end
     
@@ -64,7 +64,7 @@ function mgen_jordan4ibanez.callback(entity,now)
         entity.dynamic_data.movement.direction = {x = math.sin(entity.dynamic_data.movement.yaw)*-1,
         											y = -10,
         											z = math.cos(entity.dynamic_data.movement.yaw)}
-        --entity.object:setvelocity({x=entity.dynamic_data.movement.direction.x,y=entity.object:getvelocity().y,z=entity.dynamic_data.movement.direction.z})
+        --entity.object:setvelocity({x=entity.dynamic_data.movement.direction.x,y=entity.object:get_velocity().y,z=entity.dynamic_data.movement.direction.z})
         --entity.object:setacceleration(entity.dynamic_data.movement.direction)
     end
     
@@ -95,7 +95,7 @@ function mgen_jordan4ibanez.callback(entity,now)
             if minetest.registered_nodes[minetest.get_node({x=entity.object:get_pos().x + entity.dynamic_data.movement.direction.x,
             													y=entity.object:get_pos().y-1,
             													z=entity.object:get_pos().z + entity.dynamic_data.movement.direction.z}).name].walkable then
-                entity.object:setvelocity({x=entity.object:getvelocity().x,y=5,z=entity.object:getvelocity().z})
+                entity.object:setvelocity({x=entity.object:get_velocity().x,y=5,z=entity.object:get_velocity().z})
                 entity.dynamic_data.movement.jump_timer = 0
             end
         end

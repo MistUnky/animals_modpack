@@ -109,7 +109,7 @@ function movement_gen.callback(entity)
 		default_y_accel = nil,
 		centerpos       = entity.object:get_pos(),
 		current_acceleration    = nil,
-		current_velocity        = entity.object:getvelocity(),
+		current_velocity        = entity.object:get_velocity(),
 		now             = nil,
 
 		override_height_change_chance = 0,
@@ -146,7 +146,7 @@ function movement_gen.callback(entity)
 	end
 
 	--read additional information required for further processing
-	movement_state.current_acceleration = entity.object:getacceleration()
+	movement_state.current_acceleration = entity.object:get_acceleration()
 
 	if movement_state.changed then
 		minetest.log(LOGLEVEL_WARNING,
@@ -267,7 +267,7 @@ function movement_gen.apply_movement_changes(entity,movement_state)
 			movement_state.accel_to_set = {x=0,
 							y=movement_state.default_y_accel,
 							z=0}
-			entity.object:setvelocity({x=0,y=0,z=0})
+			entity.object:set_velocity({x=0,y=0,z=0})
 			minetest.log(LOGLEVEL_ERROR,
 						"MOBF BUG!!!! set accel requested but no accel given!")
 		end
@@ -294,7 +294,7 @@ function movement_gen.apply_movement_changes(entity,movement_state)
 										
 		-- todo check for harsh direction changes
 		entity.dynamic_data.movement.acceleration = movement_state.accel_to_set
-		entity.object:setacceleration(movement_state.accel_to_set)
+		entity.object:set_acceleration(movement_state.accel_to_set)
 	end
 end
 
@@ -366,7 +366,7 @@ function movement_gen.fix_runaway(entity,movement_state)
 		--reduce speed to 90% of current speed
 		local new_speed = mobf_calc_vector_components(direction,xzspeed*0.9)
 		new_speed.y = movement_state.current_velocity.y
-		entity.object:setvelocity(new_speed)
+		entity.object:set_velocity(new_speed)
 
 		movement_state.current_velocity = new_speed
 
@@ -458,7 +458,7 @@ function movement_gen.fix_current_pos(entity,movement_state)
 									.. current_state .. "), trying to fix")
 
 		--stop mob from moving at all
-		entity.object:setacceleration({x=0,y=movement_state.default_y_accel,z=0})
+		entity.object:set_acceleration({x=0,y=movement_state.default_y_accel,z=0})
 		movement_state.force_change = true
 
 		--mob is currently in water,
@@ -507,7 +507,7 @@ function movement_gen.fix_current_pos(entity,movement_state)
 				entity.object:moveto(targetpos)
 				movement_state.current_velocity.x = 0 --movement_state.current_velocity.x/10
 				movement_state.current_velocity.z = 0 --movement_state.current_velocity.z/10
-				entity.object:setvelocity(movement_state.current_velocity)
+				entity.object:set_velocity(movement_state.current_velocity)
 				movement_state.centerpos = targetpos
 				movement_state.basepos = entity.getbasepos(entity)
 

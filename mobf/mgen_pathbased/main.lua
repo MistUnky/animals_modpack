@@ -73,7 +73,7 @@ function p_mov_gen.callback(entity,now,dstep)
 		local update_target = true
 		
 		if entity.dynamic_data.p_movement.waypoint_stop then
-			entity.object:setvelocity({x=0,y=0,z=0})
+			entity.object:set_velocity({x=0,y=0,z=0})
 		end
 
 		--return to begining of path

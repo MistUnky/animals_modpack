@@ -133,7 +133,7 @@ function mobf_lifebar.set(lifebar,value)
 	if lifebar ~= nil then
 		local modifiername = mobf_lifebar.get_imagename(value)
 		dbg_mobf.lifebar_lvl2("MOBF: got modifier " .. modifiername .. " for value " .. value)
-		lifebar:settexturemod(modifiername)
+		lifebar:set_texture_mod(modifiername)
 	end
 end
 

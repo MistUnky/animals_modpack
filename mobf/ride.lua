@@ -40,8 +40,8 @@ function mobf_ride.attach_player(entity,player)
 
 	entity.dynamic_data.ride.is_attached = true
 	entity.dynamic_data.ride.player = player
-	entity.object:setacceleration({x=0,y=-9.81,z=0})
-	entity.object:setvelocity({x=0,y=-9.81,z=0})
+	entity.object:set_acceleration({x=0,y=-9.81,z=0})
+	entity.object:set_velocity({x=0,y=-9.81,z=0})
 
 	local attacheoffset = {x=0,y=0.5,z=0}
 
@@ -57,7 +57,7 @@ function mobf_ride.attach_player(entity,player)
 --		default.player_set_animation(player, "sit")
 --	end
 	if entity.data.ride.texturemod ~= nil then
-		entity.object:settexturemod(entity.data.ride.texturemod);
+		entity.object:set_texture_mod(entity.data.ride.texturemod);
 	end
 end
 
@@ -75,7 +75,7 @@ function mobf_ride.dettach_player(entity)
 	entity.dynamic_data.ride.is_attached = false
 	entity.dynamic_data.ride.player:set_detach()
 	entity.dynamic_data.ride.player = nil
-	entity.object:settexturemod("");
+	entity.object:set_texture_mod("");
 end
 
 
@@ -116,7 +116,7 @@ function mobf_ride.on_step_callback(entity)
 		end
 
 		local dir = entity.dynamic_data.ride.player:get_look_yaw()
-		local current_speed = entity.object:getacceleration()
+		local current_speed = entity.object:get_acceleration()
 
 		local speed_to_set = {x=0,y=current_speed.y,z=0}
 		if dir ~= nil then
@@ -193,7 +193,7 @@ function mobf_ride.on_step_callback(entity)
 					end
 				end
 
-				entity.object:setvelocity(speed_to_set)
+				entity.object:set_velocity(speed_to_set)
 
 				--fix switched model orientation
 				graphics.setyaw(entity,dir)

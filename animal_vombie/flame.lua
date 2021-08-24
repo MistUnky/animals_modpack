@@ -32,8 +32,8 @@ vombie_flame = {
 -------------------------------------------------------------------------------
 function vombie_flame.on_activate(self,staticdata)
 	self.created = mobf_get_current_time()
-	self.object:setsprite({x=0,y=self.level}, 1, 0, true)
-	self.object:setvelocity({x=0,y=self.velocity,z=0})
+	self.object:set_sprite({x=0,y=self.level}, 1, 0, true)
+	self.object:set_velocity({x=0,y=self.velocity,z=0})
 end
 
 -------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ function vombie_flame.on_step(self, dtime)
 		self.level = self.level +1
 		
 		if (self.level < 16) then
-			self.object:setsprite({x=0,y=self.level}, 1, 0, true)
+			self.object:set_sprite({x=0,y=self.level}, 1, 0, true)
 		else
 			self.object:remove()
 		end

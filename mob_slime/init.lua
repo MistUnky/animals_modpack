@@ -38,12 +38,12 @@ local slime_groups = {
 
 function mob_slime_bounce(entity)
 	local pos = entity.object:get_pos()
-	local current_velocity = entity.object:getvelocity()
+	local current_velocity = entity.object:get_velocity()
 
 	local node_below = minetest.get_node({x=pos.x,y=pos.y + entity.collisionbox[2] -0.01,z=pos.z})
 
 	if not mobf_is_walkable(node_below) then
-		entity.object:setvelocity( {x=current_velocity.x,y=entity.data.movement.bounce,z=current_velocity.z})
+		entity.object:set_velocity( {x=current_velocity.x,y=entity.data.movement.bounce,z=current_velocity.z})
 		sound.play(pos,{
 			name="mob_slime_bounce",
 			gain = 0.5,

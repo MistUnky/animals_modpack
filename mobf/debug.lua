@@ -433,8 +433,8 @@ function mobf_debug.rightclick_callback(entity,player)
 
 	local predicted_pos = movement_generic.predict_next_block(
 			basepos,
-			entity.object:getvelocity(),
-			entity.object:getacceleration())
+			entity.object:get_velocity(),
+			entity.object:get_acceleration())
 	if not ( entity.data.movement.canfly == true) then
 		predicted_pos.y = basepos.y
 	end
@@ -450,7 +450,7 @@ function mobf_debug.rightclick_callback(entity,player)
 	print("MOBF: \tCan fly:                     " .. dump(entity.data.movement.canfly))
 	print("MOBF: \tCurrent accel:               " .. printpos(entity.object:getacceleration()))
 	print("MOBF: \tDefault gravity:             " .. dump(environment.get_default_gravity(basepos, entity.environment.media, entity.data.movement.canfly)))
-	print("MOBF: \tCurrent speed:               " .. printpos(entity.object:getvelocity()))
+	print("MOBF: \tCurrent speed:               " .. printpos(entity.object:get_velocity()))
 	print("MOBF: \tSpawnpoint:                  " .. printpos(entity.dynamic_data.spawning.spawnpoint))
 	print("MOBF: \tSpawner:                     " .. dump(entity.dynamic_data.spawning.spawner))
 	print("MOBF: \tCurrent pos:                 " .. printpos(basepos))

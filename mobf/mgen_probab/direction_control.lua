@@ -73,7 +73,7 @@ function direction_control.changeaccel(pos,entity,current_velocity)
 			dbg_mobf.pmovement_lvl1(
 				"MOBF: Didn't find a suitable acceleration stopping movement: "
 				.. entity.data.name .. printpos(pos))
-			entity.object:setvelocity({x=0,y=0,z=0})
+			entity.object:set_velocity({x=0,y=0,z=0})
 			entity.dynamic_data.movement.started = false
 			--don't slow down mob
 			return  {  x=0,
@@ -379,7 +379,7 @@ function direction_control.precheck_movement(
 					movement_state.changed = true
 					return
 				else --stop immediatlely
-					entity.object:setvelocity({x=0,y=0,z=0})
+					entity.object:set_velocity({x=0,y=0,z=0})
 					movement_state.accel_to_set = {x=0,y=nil,z=0}
 					dbg_mobf.pmovement_lvl2(
 						"MOBF: stopping at safe pos")
@@ -455,7 +455,7 @@ function direction_control.precheck_movement(
 
 						if environment.evaluate_state(	upper_quality,LT_EDGE_POS) then
 
-							entity.object:setvelocity(
+							entity.object:set_velocity(
 									{x=movement_state.current_velocity.x,
 									y=5,
 									z=movement_state.current_velocity.z})
@@ -483,7 +483,7 @@ function direction_control.precheck_movement(
 				dbg_mobf.pmovement_lvl2("MOBF: mob " ..entity.data.name
 					.. " seems to be locked in, jumping to:" .. printpos(new_pos))
 
-				entity.object:setvelocity({x=0,
+				entity.object:set_velocity({x=0,
 											y=5.5,
 											z=0})
 				movement_state.accel_to_set = movement_generic.get_accel_to(new_pos,entity)

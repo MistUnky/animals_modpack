@@ -87,7 +87,7 @@ function height_level_control.precheck_movement(entity,movement_state,pos_predic
 			entity.dynamic_data.movement.changing_levels = false
 
 			movement_state.current_velocity.y = 0
-			entity.object:setvelocity(movement_state.current_velocity)
+			entity.object:set_velocity(movement_state.current_velocity)
 
 			movement_state.accel_to_set = movement_state.current_acceleration
 			movement_state.accel_to_set.y = movement_state.default_y_accel
@@ -229,7 +229,7 @@ function height_level_control.random_jump_ground(entity,movement_state)
 		--we can only jump while on solid ground!
 		if ground_distance <= 1 then
 
-			local current_speed = entity.object:getvelocity();
+			local current_speed = entity.object:get_velocity();
 
 			dbg_mobf.pmovement_lvl2("MOBF: " .. entity.data.name .." doing random jump "..
 								"speed: " .. entity.dynamic_data.movement.mpattern.random_jump_initial_speed ..
@@ -237,7 +237,7 @@ function height_level_control.random_jump_ground(entity,movement_state)
 
 			current_speed.y = entity.dynamic_data.movement.mpattern.random_jump_initial_speed
 
-			entity.object:setvelocity(current_speed)
+			entity.object:set_velocity(current_speed)
 
 			entity.dynamic_data.movement.ts_random_jump = movement_state.now
 		else
