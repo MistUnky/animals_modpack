@@ -190,11 +190,12 @@ function spawning.deactivate_mob(name,pos)
 	if spawning.mob_spawn_data[name] == nil then
 		spawning.mob_spawn_data[name] = {}
 	end
-
-	local rounded_pos = vector.round(pos)
-	local hash = minetest.hash_node_position(rounded_pos)
-	--assert (mobf_pos_is_same(mobf_hash_to_pos(hash),rounded_pos))
-	spawning.mob_spawn_data[name][hash] = true
+	if pos ~= nil then
+		local rounded_pos = vector.round(pos)
+		local hash = minetest.hash_node_position(rounded_pos)
+		--assert (mobf_pos_is_same(mobf_hash_to_pos(hash),rounded_pos))
+		spawning.mob_spawn_data[name][hash] = true
+	end
 end
 
 -------------------------------------------------------------------------------

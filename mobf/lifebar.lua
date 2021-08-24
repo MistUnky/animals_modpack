@@ -81,24 +81,26 @@ function mobf_lifebar.add(entity)
 								entity.collisionbox[6]-entity.collisionbox[3]) / 0.5) * 0.4
 	lifebar_offset = lifebar_offset * lifebar_offset
 
-	pos.y = pos.y + entity.collisionbox[5] + lifebar_offset
+	if pos ~= nil then
+		pos.y = pos.y + entity.collisionbox[5] + lifebar_offset
 
-	local lifebar = minetest.add_entity(pos,"mobf:lifebar")
+		local lifebar = minetest.add_entity(pos,"mobf:lifebar")
 
-	if lifebar ~= nil then
+		if lifebar ~= nil then
 
-		lifebar:set_attach(entity.object,"",{x=0,y=(entity.collisionbox[5] + 0.1) * BS,z=0},{x=0,y=-90,z=0})
+			lifebar:set_attach(entity.object,"",{x=0,y=(entity.collisionbox[5] + 0.1) * BS,z=0},{x=0,y=-90,z=0})
 
-		local luaentity = lifebar:get_luaentity()
-		if luaentity ~= nil then
-			dbg_mobf.lifebar_lvl3("MOBF: marking lifebar as initialized")
-			luaentity.initialized = true
-		else
-			dbg_mobf.lifebar_lvl3("MOBF: unable to create lifebar entity")
+			local luaentity = lifebar:get_luaentity()
+			if luaentity ~= nil then
+				dbg_mobf.lifebar_lvl3("MOBF: marking lifebar as initialized")
+				luaentity.initialized = true
+			else
+				dbg_mobf.lifebar_lvl3("MOBF: unable to create lifebar entity")
+			end
 		end
-	end
 
-	return lifebar
+		return lifebar
+	end
 end
 
 

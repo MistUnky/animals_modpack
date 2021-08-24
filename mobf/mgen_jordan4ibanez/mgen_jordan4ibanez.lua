@@ -76,14 +76,14 @@ function mgen_jordan4ibanez.callback(entity,now)
             local is_a_door = minetest.get_node({x=entity.object:get_pos().x + entity.dynamic_data.movement.direction.x,
             										 y=entity.object:get_pos().y,z=entity.object:get_pos().
             										 z + entity.dynamic_data.movement.direction.z}).name
-            if is_a_door == "doors:door_wood_t_1" then
+            if is_a_door == "doors:door_wood_a" then
                 minetest.punch_node({x=entity.object:get_pos().x + entity.dynamic_data.movement.direction.x,
                 						 y=entity.object:get_pos().y-1,
                 						 z=entity.object:get_pos().z + entity.dynamic_data.movement.direction.z})
                 entity.dynamic_data.movement.door_timer = 0
             end
             local is_in_door = minetest.get_node(entity.object:get_pos()).name
-            if is_in_door == "doors:door_wood_t_1" then
+            if is_in_door == "doors:door_wood_a" then
                 minetest.punch_node(entity.object:get_pos())
             end
         end
