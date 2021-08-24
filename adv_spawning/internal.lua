@@ -68,7 +68,7 @@ function adv_spawning.initialize()
 	adv_spawning.spawner_validation_delta = 0
 	adv_spawning.spawner_validation_interval = 30
 
-	adv_spawning.active_range = minetest.setting_get("active_block_range")
+	adv_spawning.active_range = minetest.settings:get("active_block_range")
 
 	if (adv_spawning.active_range == nil) then
 		adv_spawning.log("info", "No \"active_block_range\" set, defaulting to 5")
