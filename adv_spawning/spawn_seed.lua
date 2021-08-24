@@ -141,7 +141,7 @@ function adv_spawning.seed_activate(self)
 		pos.y = math.floor(pos.y + 0.5)
 		pos.z = math.floor(pos.z + 0.5)
 		
-		self.object:setpos(pos)
+		self.object:set_pos(pos)
 
 		if not adv_spawning.quota_leave() then
 			adv_spawning.dbg_log(2, "on activate  " .. self.name .. " did use way too much time")

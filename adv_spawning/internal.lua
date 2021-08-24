@@ -222,7 +222,7 @@ function adv_spawning.global_onstep(dtime)
 			adv_spawning.statistics.session.steps
 			
 	if core.is_yes(
-			core.setting_get("adv_spawning_validate_spawners")) then
+			core.settings:get("adv_spawning_validate_spawners")) then
 		
 			adv_spawning.spawner_validation_delta =
 					adv_spawning.spawner_validation_delta + dtime
