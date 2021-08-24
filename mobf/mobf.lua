@@ -597,7 +597,7 @@ function mobf.register_entity(name, cur_graphics, mob)
 				mode            = cur_graphics.mode,
 				initial_sprite_basepos = {x=0, y=0},
 				makes_footstep_sound   = footstep_sounds,
-				automatic_rotate       = true,
+				automatic_rotate       = 0,
 				groups          = mob.generic.groups,
 				hp_max          = mob.generic.base_health,
 				stepheight      = mob.generic.stepheight,
