@@ -365,7 +365,7 @@ end
 --! @param value amount of change
 -------------------------------------------------------------------------------
 function attention.increase_attention_level(entity,source,value)
-	table_id = tostring(source)
+	local table_id = tostring(source)
 
 	if entity.dynamic_data.attention ~= nil then
 
